@@ -11,3 +11,8 @@ class Base:
     @declared_attr
     def __tablename__(cls) -> str:
         return cls.__name__.lower()
+
+    def save(self, db, obj):
+        db.add(obj)
+        db.commit()
+        db.flush(obj)
