@@ -18,6 +18,7 @@ class User(Base, TimeStampMixin):
     description = Column(String(255))
     is_active = Column(Boolean, default=False)
     is_admin = Column(Boolean, default=False)
+    ip_address = Column(String(255))
 
     def save(self, db, obj):
         self.generate_uuid()
