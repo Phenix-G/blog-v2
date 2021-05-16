@@ -1,16 +1,10 @@
-from sqlalchemy import Boolean, Column, String, LargeBinary
+import uuid
+
+from sqlalchemy import Boolean, Column, String
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from db import Base
 from models.mixins import TimeStampMixin
-
-
-def make_password(raw_password: str) -> str:
-    return generate_password_hash(raw_password, method="pbkdf2:sha256:216000", salt_length=16)
-
-
-def check_password(password: str, raw_password: str) -> bool:
-    return check_password_hash(password, raw_password)
 
 
 class User(Base, TimeStampMixin):
@@ -24,3 +18,19 @@ class User(Base, TimeStampMixin):
     description = Column(String(255))
     is_active = Column(Boolean, default=False)
     is_admin = Column(Boolean, default=False)
+    ip_address = Column(String(255))
+
+    def save(self, db, obj):
+        self.generate_uuid()
+        self.make_password(obj.password)
+        super().save(db, obj)
+
+    def make_password(self, raw_password):
+        self.password = generate_password_hash(raw_password, method="pbkdf2:sha256:216000", salt_length=16)
+
+    def check_password(self, raw_password: str) -> bool:
+        return check_password_hash(self.password, raw_password)
+
+    def generate_uuid(self):
+        namespace = uuid.uuid4()
+        self.uuid = uuid.uuid5(namespace, self.username)
