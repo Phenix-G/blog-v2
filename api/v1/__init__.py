@@ -1,6 +1,8 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Author : Phenix-G
+# @File   : __init__.py.py
+# @Time   : 2021/06/04 22:26
 from fastapi import APIRouter
 
-from api.v1 import users
-
-api_router = APIRouter()
-api_router.include_router(users.router, prefix='/users', tags=['users'])
+router = APIRouter()

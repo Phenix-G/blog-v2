@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Author : Phenix-G
+# @File   : user.py
+# @Time   : 2021/06/04 22:13
 from typing import Optional
 
 from pydantic import BaseModel, EmailStr
@@ -12,10 +17,6 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     raw_password: str
-
-
-class UserUpdate(UserBase):
-    raw_password: Optional[str] = None
 
 
 class User(UserBase):

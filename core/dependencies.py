@@ -1,6 +1,8 @@
-from fastapi import Depends
-from sqlalchemy.orm import Session
-
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Author : Phenix-G
+# @File   : dependencies.py
+# @Time   : 2021/06/04 22:21
 from db.session import SessionLocal
 
 
@@ -11,7 +13,3 @@ def get_db():
         yield db
     finally:
         db.close()
-
-
-def get_current_user(db: Session = Depends(get_db)):
-    return

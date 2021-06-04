@@ -1,19 +1,15 @@
-from pathlib import Path
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Author : Phenix-G
+# @File   : config.py
+# @Time   : 2021/06/04 22:21
 
-from pydantic import BaseSettings
-from starlette.config import Config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent
+from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# class Settings(BaseSettings):
-#     ENVIRONMENT: str = None
-#
-#     class Config:
-#         env_file = '.env'
-#         env_file_encoding = 'utf-8'
-#         case_sensitive = True
 ENVIRONMENT = 'development'
 
 DATABASES = {
@@ -39,4 +35,3 @@ DATABASES = {
         'NAME': 'test',
     },
 }
-# settings = Settings()

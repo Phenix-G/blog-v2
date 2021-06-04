@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Author : Phenix-G
+# @File   : base.py
+# @Time   : 2021/06/04 22:15
 from sqlalchemy import Column, Integer
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import Session
