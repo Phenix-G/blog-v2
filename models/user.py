@@ -1,6 +1,11 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Author : Phenix-G
+# @File   : user.py
+# @Time   : 2021/06/04 23:12
 from uuid import uuid4, uuid5
 
-from sqlalchemy import Boolean, Column, String
+from sqlalchemy import Column, String, Boolean
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from db import Base

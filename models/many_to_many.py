@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Author : Phenix-G
+# @File   : many_to_many.py
+# @Time   : 2021/06/04 23:15
 from sqlalchemy import Table, Column, Integer, ForeignKey
 
 from db import Base

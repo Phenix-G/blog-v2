@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Author : Phenix-G
+# @File   : post.py
+# @Time   : 2021/06/04 23:13
 from sqlalchemy import Column, Integer, String, ForeignKey, Text
 
 from db import Base
