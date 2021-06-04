@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
+from sqlalchemy.orm import Session
 
 
 @as_declarative()
@@ -16,3 +17,7 @@ class Base:
         db.add(obj)
         db.commit()
         db.flush(obj)
+
+    @classmethod
+    def query(cls, db: Session):
+        return db.query(cls)
