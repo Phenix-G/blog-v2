@@ -19,6 +19,9 @@ class Base:
         return cls.__name__.lower()
 
     def save(self, db, obj):
+        return self._save(db, obj)
+
+    def _save(self, db, obj):
         db.add(obj)
         db.commit()
         db.flush(obj)
