@@ -26,16 +26,19 @@ class User(Base, TimeStampMixin):
     ip_address = Column(String(255))
 
     def save(self, db, obj):
-        self.generate_uuid()
-        self.make_password(obj.password)
+        self._generate_uuid()
+        self._make_password(obj.password)
         super().save(db, obj)
 
-    def make_password(self, raw_password):
+    def set_password(self, raw_password):
+        return self._make_password(raw_password)
+
+    def _make_password(self, raw_password):
         self.password = generate_password_hash(raw_password, method="pbkdf2:sha256:216000", salt_length=16)
 
-    def check_password(self, raw_password: str) -> bool:
+    def _check_password(self, raw_password: str) -> bool:
         return check_password_hash(self.password, raw_password)
 
-    def generate_uuid(self):
+    def _generate_uuid(self):
         namespace = uuid4()
         self.uuid = uuid5(namespace, self.username)
