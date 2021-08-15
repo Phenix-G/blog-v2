@@ -19,6 +19,18 @@ class UserCreate(UserBase):
     raw_password: str
 
 
+class UserUpdate(UserBase):
+    username: Optional[str] = None
+    raw_password: Optional[str] = None
+
+
+class Reset(BaseModel):
+    email: EmailStr
+    password: str
+    check_password: str
+    verify_code: str
+
+
 class User(UserBase):
     pass
 
