@@ -26,8 +26,12 @@ class User(Base, TimeStampMixin):
     ip_address = Column(String(255))
 
     def save(self, db, obj):
-        self._generate_uuid()
-        self._make_password(obj.password)
+        if self.uuid:
+            pass
+        else:
+            self._generate_uuid()
+        if obj.password:
+            self._make_password(obj.password)
         super().save(db, obj)
 
     def set_password(self, raw_password):
