@@ -1,0 +1,24 @@
+version: 3
+services:
+    web:
+        restart: always
+        container_name: fastapi_blog
+        command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000"
+        volumes: 
+            - .:/backend
+        ports: 
+            - 8000:8000
+        depends_on:
+            - db
+    db:
+        container_name: blog_v2
+        image: mysql:5.7
+        volumes:
+        - "./mysql:/var/lib/mysql"
+        ports:
+        - "3306:3306"
+        restart: always
+        environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=blog_v2
+        - "TZ=Asia/Shanghai"
