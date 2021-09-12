@@ -10,28 +10,28 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ENVIRONMENT = 'development'
 
-DATABASES = {
-    'development': {
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '3306',
+class Config:
+    DEBUG = True
+    DATABASE = {
         'NAME': 'fastapi',
-    },
-    'production': {
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
-        'NAME': 'production',
-    },
-    'test': {
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+    }
+
+
+class Development(Config):
+    pass
+
+
+class Production(Config):
+    DEBUG = False
+    DATABASE = {
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '3306',
-        'NAME': 'test',
-    },
-}
+    }
