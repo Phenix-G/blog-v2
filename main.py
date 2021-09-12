@@ -3,14 +3,6 @@
 # @Author : Phenix-G
 # @File   : main.py
 # @Time   : 2021/06/04 22:09
-from fastapi import FastAPI
+from core import main
 
-from api import api_router
-
-app = FastAPI()
-app.include_router(api_router)
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run('main:app', debug=True, reload=True)
+main()
