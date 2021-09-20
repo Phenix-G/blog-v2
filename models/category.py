@@ -3,14 +3,34 @@
 # @Author : Phenix-G
 # @File   : category.py
 # @Time   : 2021/06/04 23:14
-from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
+from typing import Optional, List, TYPE_CHECKING
 
-from db import Base
+from sqlmodel import Boolean, Field, Column, String, SQLModel, Relationship
+
+from . import Base
+from .base import TimeStampMixin
+
+if TYPE_CHECKING:
+    from . import Article
 
 
-class Category(Base):
-    __tablename__ = "categories"
+class CategoryBase(Base, TimeStampMixin):
+    title: str = Field(sa_column=Column(String(50), nullable=False, comment='标题'))
+    is_delete: bool = Field(sa_column=Column(Boolean, default=False, nullable=False, comment='是否删除'))
+    article: List["Article"] = Relationship(back_populates="category")
 
-    name = Column(String(20), unique=True, index=True)
-    posts = relationship("Post", backref="category")
+
+class Category(CategoryBase, table=True):
+    pass
+
+
+class CategoryCreate(SQLModel):
+    title: str
+
+
+class CategoryUpdate(SQLModel):
+    title: Optional[str] = None
+
+
+class CategoryRead(CategoryBase):
+    id: int

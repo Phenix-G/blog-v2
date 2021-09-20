@@ -3,46 +3,52 @@
 # @Author : Phenix-G
 # @File   : user.py
 # @Time   : 2021/06/04 23:12
-from uuid import uuid4, uuid5
+from typing import Optional
+from uuid import uuid4, uuid5, UUID
 
-from sqlalchemy import Column, String, Boolean
+from pydantic import EmailStr
+from sqlmodel import Boolean, Column, Field, SQLModel, String
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from db import Base
-from models.mixins import TimeStampMixin
+from . import Base
+from .base import TimeStampMixin
 
 
-class User(Base, TimeStampMixin):
-    __tablename__ = "users"
+class UserBase(Base, TimeStampMixin):
+    uuid: UUID = Field(sa_column=Column(String(36), unique=True, nullable=False))
+    username: str = Field(sa_column=Column(String(20), unique=True, index=True, nullable=False, comment='用户名'))
+    email: Optional[EmailStr] = Field(
+        sa_column=Column(String(40), unique=True, index=True, nullable=True, comment='邮箱')
+    )
+    password: str = Field(sa_column=Column(String(102), nullable=False, comment='密码'))
+    phone: str = Field(sa_column=Column(String(11), unique=True, index=True, nullable=False, comment='手机号'))
+    description: Optional[str] = Field(default='', index=False)  # 描述
+    is_active: bool = Field(sa_column=Column(Boolean, default=False, comment='激活状态'))
+    is_admin: bool = Field(sa_column=Column(Boolean, default=False, comment='管理员状态'))
+    ip_address: str = Field(default='', index=False)  # ip地址
 
-    username = Column(String(20), unique=True, index=True, nullable=False)
-    email = Column(String(40), unique=True, index=True)
-    uuid = Column(String(255), unique=True, index=True)
-    password = Column(String(255), nullable=False)
-    phone = Column(String(11), unique=True, index=True, nullable=True)
-    description = Column(String(255))
-    is_active = Column(Boolean, default=False)
-    is_admin = Column(Boolean, default=False)
-    ip_address = Column(String(255))
 
-    def save(self, db, obj):
-        if self.uuid:
-            pass
-        else:
-            self._generate_uuid()
-        if obj.password:
-            self._make_password(obj.password)
-        super().save(db, obj)
+class User(UserBase, table=True):
+    pass
 
-    def set_password(self, raw_password):
-        return self._make_password(raw_password)
 
-    def _make_password(self, raw_password):
-        self.password = generate_password_hash(raw_password, method="pbkdf2:sha256:216000", salt_length=16)
+class UserCreate(SQLModel):
+    username: str
+    password: str
+    phone: str
+    email: str
+    description: Optional[str]
 
-    def _check_password(self, raw_password: str) -> bool:
-        return check_password_hash(self.password, raw_password)
 
-    def _generate_uuid(self):
-        namespace = uuid4()
-        self.uuid = uuid5(namespace, self.username)
+class UserRead(UserBase):
+    id: int
+    description: str
+    email: str
+
+
+class UserUpdate(SQLModel):
+    username: Optional[str] = None
+    email: Optional[EmailStr] = None
+    password: Optional[str] = None
+    phone: Optional[str] = None
+    description: Optional[str] = None
