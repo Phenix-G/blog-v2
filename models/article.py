@@ -7,8 +7,7 @@ from typing import Optional, TYPE_CHECKING, List
 
 from sqlmodel import Boolean, Column, String, Text, Field, Integer, SQLModel, Relationship
 
-from . import Base
-from .base import TimeStampMixin
+from .base import Base, TimeStampMixin
 from .article_tag_link import ArticleTagLink
 
 if TYPE_CHECKING:

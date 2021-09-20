@@ -10,8 +10,7 @@ from pydantic import EmailStr
 from sqlmodel import Boolean, Column, Field, SQLModel, String
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from . import Base
-from .base import TimeStampMixin
+from .base import Base, TimeStampMixin
 
 
 class UserBase(Base, TimeStampMixin):

@@ -7,8 +7,7 @@ from typing import Optional, List, TYPE_CHECKING
 
 from sqlmodel import Boolean, Field, Column, String, SQLModel, Relationship
 
-from . import Base
-from .base import TimeStampMixin
+from .base import Base, TimeStampMixin
 
 if TYPE_CHECKING:
     from . import Article
