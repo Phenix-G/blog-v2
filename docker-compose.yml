@@ -3,7 +3,7 @@ services:
     web:
         restart: always
         container_name: fastapi_blog
-        command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000"
+        command: bash -c "python main.py runserver --host 0.0.0.0 --port 8000"
         volumes: 
             - .:/backend
         ports: 
