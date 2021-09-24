@@ -8,7 +8,7 @@ from typing import Optional, TYPE_CHECKING, List
 from sqlmodel import Boolean, Column, String, Text, Field, Integer, SQLModel, Relationship
 
 from .base import Base, TimeStampMixin
-from .article_tag_link import ArticleTagLink
+from .article_link_tag import ArticleLinkTag
 
 if TYPE_CHECKING:
     from . import Category, Tag
@@ -25,7 +25,7 @@ class ArticleBase(Base, TimeStampMixin):
     is_delete: bool = Field(sa_column=Column(Boolean, default=False, comment='是否删除'))
     category_id: int = Field(default=None, foreign_key="category.id")
     category: 'Category' = Relationship(back_populates="article")  # 分类
-    tag: Optional['Tag'] = Relationship(back_populates='article', link_model=ArticleTagLink)  # 标签
+    tag: Optional['Tag'] = Relationship(back_populates='article', link_model=ArticleLinkTag)  # 标签
 
 
 class Article(ArticleBase, table=True):
