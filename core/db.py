@@ -3,9 +3,10 @@
 # @Author : Phenix-G
 # @File   : db.py
 # @Time   : 2021/09/21 2:09
-from sqlmodel import Session
+from sqlmodel import Session, create_engine
 
-from db.session import engine
+DATABASE_URL = 'mysql://root:root@localhost:3306/fastapi?charset=utf8'
+engine = create_engine(DATABASE_URL)
 
 
 class DBSession:
