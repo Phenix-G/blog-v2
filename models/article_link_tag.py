@@ -6,10 +6,10 @@
 from typing import Optional
 
 from sqlmodel import Field
-from .base import Base, TimeStampMixin
+from . import base
 
 
-class ArticleLinkTag(Base, TimeStampMixin, table=True):
+class ArticleLinkTag(base.Model, table=True):
     __tablename__ = 'article_link_tag'
     article_id: Optional[int] = Field(
         default=None, foreign_key="article.id", primary_key=True

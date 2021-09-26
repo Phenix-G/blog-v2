@@ -9,10 +9,10 @@ from uuid import uuid4, uuid5, UUID
 from sqlmodel import Boolean, Column, Field, SQLModel, String
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from .base import Base, TimeStampMixin
+from . import base
 
 
-class UserBase(Base, TimeStampMixin):
+class UserBase(base.Model):
     uuid: UUID = Field(sa_column=Column(String(36), unique=True, nullable=False))
     username: str = Field(sa_column=Column(String(20), unique=True, index=True, nullable=False, comment='用户名'))
     email: Optional[str] = Field(

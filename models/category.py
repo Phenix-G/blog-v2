@@ -7,13 +7,13 @@ from typing import Optional, List, TYPE_CHECKING
 
 from sqlmodel import Boolean, Field, Column, String, SQLModel, Relationship
 
-from .base import Base, TimeStampMixin
+from . import base
 
 if TYPE_CHECKING:
     from . import Article
 
 
-class CategoryBase(Base, TimeStampMixin):
+class CategoryBase(base.Model):
     title: str = Field(sa_column=Column(String(50), nullable=False, comment='标题'))
     is_delete: bool = Field(sa_column=Column(Boolean, default=False, nullable=False, comment='是否删除'))
     article: List["Article"] = Relationship(back_populates="category")

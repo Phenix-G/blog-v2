@@ -3,18 +3,18 @@
 # @Author : Phenix-G
 # @File   : article.py
 # @Time   : 2021/06/04 23:13
-from typing import Optional, TYPE_CHECKING, List
+from typing import Optional, TYPE_CHECKING
 
 from sqlmodel import Boolean, Column, String, Text, Field, Integer, SQLModel, Relationship
 
-from .base import Base, TimeStampMixin
+from . import base
 from .article_link_tag import ArticleLinkTag
 
 if TYPE_CHECKING:
     from . import Category, Tag
 
 
-class ArticleBase(Base, TimeStampMixin):
+class ArticleBase(base.Model):
     title: str = Field(sa_column=Column(String(50), nullable=False, comment='标题'))
     description: Optional[str] = Field(default='', index=False)  # 描述
     content: str = Field(sa_column=Column(Text, nullable=False, comment='内容'))

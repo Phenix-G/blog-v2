@@ -70,3 +70,7 @@ class TimeStampMixin(BaseModel):
             comment='更新时间'
         )
     )
+
+
+class Model(Base, TimeStampMixin):
+    pass
