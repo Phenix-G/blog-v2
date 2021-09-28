@@ -9,7 +9,7 @@ from typing import Optional
 from pydantic import BaseModel
 from sqlmodel import Column, SQLModel, Field, TIMESTAMP, select
 
-from core.db import session
+from core.settings import session
 
 
 class Base(SQLModel):
