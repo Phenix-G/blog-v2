@@ -17,7 +17,7 @@ async def get_list():
 
 
 @router.get('/{article_id}')
-async def get(article_id: int, ):
+async def get(article_id: int):
     db_article = Article.get(article_id)
     return {'data': db_article}
 

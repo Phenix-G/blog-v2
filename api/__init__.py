@@ -5,7 +5,7 @@
 # @Time   : 2021/06/04 22:25
 from fastapi import APIRouter
 
-from .blog import v1
+from . import blog
 
 api_router = APIRouter()
-api_router.include_router(v1.router)
+api_router.include_router(blog.router)
