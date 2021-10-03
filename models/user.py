@@ -27,10 +27,10 @@ class UserBase(base.Model):
 
 
 class User(UserBase, table=True):
-    def save(self, obj):
+    def save(self):
         self.__generate_uuid()
         self.__make_password(self.password)
-        super().save(self)
+        super().save()
 
     def set_password(self, raw_password):
         return self.__make_password(raw_password)

@@ -26,20 +26,19 @@ class Base(SQLModel):
     @classmethod
     def create(cls, **kwargs):
         obj = cls(**kwargs)
-        cls.save(obj)
+        obj.save()
         return obj
 
     def update(self, update_obj):
         for key, value in update_obj.items():
             setattr(self, key, value)
-        self.save(self)
+        self.save()
         return self
 
-    @classmethod
-    def save(cls, obj):
-        cls.__session().add(obj)
-        cls.__session().commit()
-        cls.__session().refresh(obj)
+    def save(self):
+        self.__session().add(self)
+        self.__session().commit()
+        self.__session().refresh(self)
 
     def delete(self):
         self.__session().delete(self)
@@ -47,7 +46,7 @@ class Base(SQLModel):
 
     def row_delete(self):
         setattr(self, 'is_delete', True)
-        self.save(self)
+        self.save()
 
     @classmethod
     def __session(cls):
