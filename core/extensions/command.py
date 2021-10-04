@@ -21,6 +21,6 @@ def create_app():
 def register_command(typer):
     @typer.command()
     def runserver():
-        uvicorn.run('utils.command:create_app', reload=True, debug=True, factory=True)
+        uvicorn.run('core.extensions.command:create_app', reload=True, debug=True, factory=True)
 
     return typer
