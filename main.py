@@ -3,6 +3,11 @@
 # @Author : Phenix-G
 # @File   : main.py
 # @Time   : 2021/06/04 22:09
-from core import main
+from typer import Typer
 
-main()
+from utils.command import register_command
+
+typer = Typer()
+app = register_command(typer)
+if __name__ == '__main__':
+    app()
