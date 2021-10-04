@@ -5,7 +5,7 @@
 # @Time   : 2021/06/04 22:09
 from typer import Typer
 
-from utils.command import register_command
+from core.extensions.command import register_command
 
 typer = Typer()
 app = register_command(typer)
