@@ -6,6 +6,7 @@ fastapi==0.68.1
 greenlet==1.1.1
 h11==0.12.0
 importlib-resources==5.2.2
+loguru==0.5.3
 Mako==1.1.5
 MarkupSafe==2.0.1
 mysqlclient==2.0.3
@@ -18,5 +19,6 @@ typer==0.4.0
 typing-extensions==3.10.0.2
 uvicorn==0.15.0
 Werkzeug==2.0.1
+win32-setctime==1.0.3
 wincertstore==0.2
 zipp==3.5.0
